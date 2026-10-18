@@ -46,7 +46,7 @@ Prefer no modifier key? Switch the tray option to *Just drag* and the wheel appe
 
 **The easy way**
 
-1. Download `DragToConvert Setup x.y.z.exe` from the [latest release](https://github.com/Kind3rin/DragToConvert/releases/latest).
+1. Download `DragToConvert-Setup-x.y.z.exe` from the [latest release](https://github.com/Kind3rin/DragToConvert/releases/latest).
 2. Run it. It installs per-user, **no admin rights needed**, and starts right away.
 3. Look for the wheel icon in the system tray (you may need to expand the `^` arrow).
 
@@ -104,7 +104,7 @@ Everything is processed locally, nothing leaves your PC. The app makes no networ
 Make sure the drag starts in File Explorer or on the desktop, or enable *Also work outside File Explorer*. Apps running as administrator can't be observed by a normal-privilege app: run DragToConvert as administrator too if you need that.
 
 **My antivirus flags it. Why?**
-DragToConvert needs a global mouse hook to notice when a drag starts, and that technique is also used by keyloggers, so some security tools are suspicious of unsigned apps that use it. The code is fully open (the hook only reads button state, pointer movement and Shift: see [SECURITY.md](SECURITY.md)). Every release ships a `SHA256SUMS.txt` so you can verify the download (`Get-FileHash "DragToConvert Setup x.y.z.exe"`), and you can always build the installer yourself.
+DragToConvert needs a global mouse hook to notice when a drag starts, and that technique is also used by keyloggers, so some security tools are suspicious of unsigned apps that use it. The code is fully open (the hook only reads button state, pointer movement and Shift: see [SECURITY.md](SECURITY.md)). Every release ships a `SHA256SUMS.txt` so you can verify the download (`Get-FileHash "DragToConvert-Setup-x.y.z.exe"`), and you can always build the installer yourself.
 
 **Why does Shift + drag in Explorer normally move files?**
 It does, and that's why the wheel is only a drop target: if you release the file anywhere else, Windows behaves exactly as usual.

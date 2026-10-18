@@ -41,7 +41,7 @@ Non vuoi usare Shift? Dal menu della tray scegli *Solo trascina*: la ruota compa
 
 **Il modo facile**
 
-1. Scarica `DragToConvert Setup x.y.z.exe` dall'[ultima release](https://github.com/Kind3rin/DragToConvert/releases/latest).
+1. Scarica `DragToConvert-Setup-x.y.z.exe` dall'[ultima release](https://github.com/Kind3rin/DragToConvert/releases/latest).
 2. Eseguilo: si installa per l'utente corrente, **senza permessi di amministratore**, e parte subito.
 3. Cerca l'icona a ruota nell'area di notifica (potrebbe essere dietro la freccia `^`).
 
@@ -95,7 +95,7 @@ Tutto viene elaborato in locale, niente esce dal PC e l'app non fa richieste di 
 Controlla che il trascinamento parta da Esplora file o dal desktop, oppure attiva *Funziona anche fuori da Esplora file*. Le app eseguite come amministratore non sono osservabili da un'app normale: in quel caso avvia anche DragToConvert come amministratore.
 
 **L'antivirus lo segnala. Perché?**
-Per accorgersi dell'inizio di un trascinamento serve un hook globale del mouse, tecnica usata anche dai keylogger: alcuni antivirus sono sospettosi verso le app non firmate che la usano. Il codice è aperto (l'hook legge solo stato dei pulsanti, movimento e Shift: vedi [SECURITY.md](SECURITY.md)). Ogni release include `SHA256SUMS.txt` per verificare il download (`Get-FileHash "DragToConvert Setup x.y.z.exe"`) e puoi sempre compilare l'installer da solo.
+Per accorgersi dell'inizio di un trascinamento serve un hook globale del mouse, tecnica usata anche dai keylogger: alcuni antivirus sono sospettosi verso le app non firmate che la usano. Il codice è aperto (l'hook legge solo stato dei pulsanti, movimento e Shift: vedi [SECURITY.md](SECURITY.md)). Ogni release include `SHA256SUMS.txt` per verificare il download (`Get-FileHash "DragToConvert-Setup-x.y.z.exe"`) e puoi sempre compilare l'installer da solo.
 
 **Shift + trascina in Esplora file di solito sposta i file, no?**
 Sì, per questo la ruota è solo una destinazione di rilascio: se rilasci il file altrove, Windows si comporta come sempre.

@@ -1,6 +1,6 @@
 {
   "name": "drag-to-convert",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Drag a file onto a wheel of formats and tools: a tiny Windows tray app that converts files where you already are.",
   "main": "src/main.js",
   "scripts": {
@@ -57,7 +57,8 @@
     "nsis": {
       "oneClick": true,
       "perMachine": false,
-      "runAfterFinish": true
+      "runAfterFinish": true,
+      "artifactName": "DragToConvert-Setup-${version}.exe"
     }
   },
   "homepage": "https://github.com/Kind3rin/DragToConvert#readme",
