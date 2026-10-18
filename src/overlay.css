@@ -1,0 +1,202 @@
+:root {
+  --ink: #f6f3ff;
+  --ink-dim: rgba(246, 243, 255, 0.66);
+  --bg: #120e24;
+  --spring: cubic-bezier(0.2, 1.35, 0.35, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 580px;
+  height: 600px;
+  overflow: hidden;
+  /* Alpha minima: i pixel completamente trasparenti di una finestra layered lasciano "passare" il drag. */
+  background: rgba(0, 0, 0, 0.02);
+  font-family: "Segoe UI Variable Display", "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
+  color: var(--ink);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#stage {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: scale(0.82);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  pointer-events: none;
+}
+body.visible #stage {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.22s ease, transform 0.5s var(--spring);
+  pointer-events: auto;
+}
+
+/* Disco scuro di contrasto dietro la ruota */
+#disc {
+  position: absolute;
+  left: 290px; top: 300px;
+  width: 590px; height: 590px;
+  margin: -295px 0 0 -295px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, #0c0820 0%, #0f0a26 72%, rgba(15, 10, 38, 0.9) 84%, rgba(15, 10, 38, 0) 100%);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+/* Alone colorato che ruota lentamente */
+#aura {
+  position: absolute;
+  left: 290px; top: 300px;
+  width: 520px; height: 520px;
+  margin: -260px 0 0 -260px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #7c3aed, #db2777, #f59e0b, #14b8a6, #7c3aed);
+  opacity: 0.22;
+  filter: blur(46px);
+  animation: spin 14s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+#wheel {
+  position: absolute;
+  inset: 0;
+  width: 580px;
+  height: 600px;
+  overflow: visible;
+}
+
+/* ------------------------------ Segmenti ------------------------------ */
+.seg-pop {
+  transform-origin: 290px 300px;
+  animation: pop 0.55s var(--spring) both;
+  animation-delay: calc(var(--i) * 38ms + 60ms);
+}
+@keyframes pop {
+  from { opacity: 0; transform: scale(0.35) rotate(-24deg); }
+  to   { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+.seg {
+  transition: transform 0.22s var(--spring), opacity 0.2s ease, filter 0.2s ease;
+  transform: translate(0, 0);
+  cursor: pointer;
+}
+.seg path.body { stroke-width: 9px; stroke-linejoin: round; }
+.seg path.sheen { fill: url(#sheen); stroke: none; pointer-events: none; }
+body.has-hover .seg { filter: brightness(0.6) saturate(0.85); }
+.seg.hover {
+  filter: brightness(1.06) drop-shadow(0 0 16px var(--glow)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.45)) !important;
+  transform: translate(var(--dx), var(--dy));
+}
+.seg text { pointer-events: none; fill: #fff; text-anchor: middle; }
+.seg .lbl { font-weight: 800; font-size: 22px; letter-spacing: 0.4px; paint-order: stroke; stroke: rgba(0, 0, 0, 0.28); stroke-width: 3px; }
+.seg .lbl.tool { font-size: 14px; stroke-width: 2.5px; }
+.seg .sub { font-weight: 600; font-size: 10.5px; letter-spacing: 0.9px; text-transform: uppercase; fill-opacity: 0.82; }
+.seg .ico { fill: none; stroke: #fff; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
+
+body.busy .seg-pop, body.done .seg-pop, body.error .seg-pop {
+  transition: transform 0.4s ease, opacity 0.3s ease;
+  transform: scale(0.45);
+  opacity: 0;
+  animation: none;
+}
+
+/* -------------------------------- Hub -------------------------------- */
+#hub {
+  position: absolute;
+  left: 290px; top: 300px;
+  width: 176px; height: 176px;
+  margin: -88px 0 0 -88px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 22%, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0) 55%),
+    linear-gradient(160deg, #241a4a 0%, #130d2b 100%);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08), 0 12px 40px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  display: grid;
+  place-items: center;
+  transition: transform 0.3s var(--spring);
+}
+body.has-hover #hub { transform: scale(1.04); }
+body.busy #hub, body.done #hub, body.error #hub { transform: scale(1.22); }
+
+#ring {
+  position: absolute;
+  inset: -8px;
+  width: 192px; height: 192px;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+.ring-bg { fill: none; stroke: rgba(255, 255, 255, 0.08); stroke-width: 6; }
+.ring-fg {
+  fill: none;
+  stroke: url(#ringGrad);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 578;
+  stroke-dashoffset: 578;
+  transition: stroke-dashoffset 0.25s linear;
+  opacity: 0;
+}
+body.busy .ring-fg, body.done .ring-fg { opacity: 1; }
+body.done .ring-fg { stroke-dashoffset: 0 !important; }
+body.error .ring-bg { stroke: rgba(248, 113, 113, 0.6); }
+
+.hub-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 0 18px;
+  text-align: center;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.2s ease, transform 0.3s var(--spring);
+  pointer-events: none;
+}
+body.idle #hubIdle, body.busy #hubBusy, body.done #hubDone, body.error #hubError {
+  opacity: 1;
+  transform: scale(1);
+}
+body.done #hubDone { pointer-events: auto; cursor: pointer; border-radius: 50%; }
+
+.eyebrow { font-size: 10.5px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: var(--ink-dim); }
+.big {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  line-height: 1.1;
+  background: linear-gradient(120deg, #c4b5fd, #f9a8d4 55%, #fde68a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.big.sm { font-size: 24px; }
+.big.fit { font-size: 26px; }
+.small { font-size: 12px; font-weight: 500; color: var(--ink-dim); max-width: 140px; }
+.ellipsis { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.pct { font-size: 38px; font-weight: 800; font-variant-numeric: tabular-nums; }
+
+.check, .cross { width: 46px; height: 46px; fill: none; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.check { stroke: #4ade80; }
+.cross { stroke: #f87171; }
+.check path { stroke-dasharray: 40; stroke-dashoffset: 40; }
+.cross path { stroke-dasharray: 60; stroke-dashoffset: 60; }
+body.done .check path { animation: draw 0.45s 0.1s ease forwards; }
+body.error .cross path { animation: draw 0.45s 0.1s ease forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+
+/* Impulso discreto quando in attesa */
+body.idle:not(.has-hover) #hub::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(196, 181, 253, 0.5);
+  animation: ping 1.8s ease-out infinite;
+}
+@keyframes ping { from { transform: scale(1); opacity: 0.7; } to { transform: scale(1.35); opacity: 0; } }

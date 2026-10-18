@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:" />
+  <title>DragToConvert</title>
+  <link rel="stylesheet" href="overlay.css" />
+</head>
+<body>
+  <div id="stage">
+    <div id="disc"></div>
+    <div id="aura"></div>
+    <svg id="wheel" viewBox="0 0 580 600" aria-hidden="true"></svg>
+
+    <div id="hub">
+      <svg id="ring" viewBox="0 0 200 200" aria-hidden="true">
+        <defs>
+          <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#a78bfa" />
+            <stop offset="0.5" stop-color="#f472b6" />
+            <stop offset="1" stop-color="#fbbf24" />
+          </linearGradient>
+        </defs>
+        <circle class="ring-bg" cx="100" cy="100" r="92" />
+        <circle id="ringFg" class="ring-fg" cx="100" cy="100" r="92" />
+      </svg>
+      <div id="hubIdle" class="hub-face">
+        <div class="eyebrow" id="eyebrow">Rilascia su</div>
+        <div class="big" id="bigLabel">Scegli</div>
+        <div class="small" id="smallLabel">formato o strumento</div>
+      </div>
+      <div id="hubBusy" class="hub-face">
+        <div class="pct" id="pct">0%</div>
+        <div class="small ellipsis" id="busyName">Conversione…</div>
+      </div>
+      <div id="hubDone" class="hub-face">
+        <svg class="check" viewBox="0 0 52 52" aria-hidden="true"><path d="M14 27l8 8 16-17" /></svg>
+        <div class="big sm" id="doneTitle">Fatto</div>
+        <div class="small ellipsis" id="doneName"></div>
+      </div>
+      <div id="hubError" class="hub-face">
+        <svg class="cross" viewBox="0 0 52 52" aria-hidden="true"><path d="M17 17l18 18M35 17L17 35" /></svg>
+        <div class="big sm" id="errTitle">Errore</div>
+        <div class="small ellipsis" id="errMsg"></div>
+      </div>
+    </div>
+  </div>
+  <script src="overlay.js"></script>
+</body>
+</html>
+

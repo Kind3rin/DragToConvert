@@ -1,0 +1,80 @@
+{
+  "name": "drag-to-convert",
+  "version": "1.0.0",
+  "description": "Drag a file onto a wheel of formats and tools: a tiny Windows tray app that converts files where you already are.",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "demo": "electron . --demo",
+    "selftest": "node scripts/selftest.js",
+    "icon": "node scripts/make-icon.js",
+    "dist": "electron-builder --win nsis",
+    "pack": "electron-builder --win --dir",
+    "check": "node --check src/main.js && node --check src/converter.js && node --check src/overlay.js && node --check src/catalog.js && node --check src/i18n.js && node --check src/preload.js",
+    "screenshots": "node scripts/make-screenshots.js"
+  },
+  "author": "Luca Tiengo",
+  "license": "MIT",
+  "dependencies": {
+    "ffmpeg-static": "^5.3.0",
+    "heic-convert": "^2.1.0",
+    "koffi": "^3.3.3",
+    "pdf-lib": "^1.17.1",
+    "sharp": "^0.35.5",
+    "uiohook-napi": "^1.5.5"
+  },
+  "productName": "DragToConvert",
+  "devDependencies": {
+    "electron-builder": "^26.15.3",
+    "electron": "^44.9.0"
+  },
+  "build": {
+    "appId": "app.dragtoconvert",
+    "productName": "DragToConvert",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "package.json",
+      "build/icon.png",
+      "LICENSE",
+      "THIRD_PARTY_NOTICES.md"
+    ],
+    "asarUnpack": [
+      "node_modules/ffmpeg-static/**",
+      "node_modules/sharp/**",
+      "node_modules/@img/**",
+      "node_modules/uiohook-napi/**",
+      "node_modules/koffi/**"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "runAfterFinish": true
+    }
+  },
+  "homepage": "https://github.com/Kind3r/DragToConvert#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kind3r/DragToConvert.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Kind3r/DragToConvert/issues"
+  },
+  "keywords": [
+    "file-converter",
+    "drag-and-drop",
+    "windows",
+    "electron",
+    "ffmpeg",
+    "sharp",
+    "tray-app"
+  ]
+}
