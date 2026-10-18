@@ -5,7 +5,7 @@ Thanks for wanting to help! DragToConvert is a small personal project, so the pr
 ## Getting started
 
 ```bash
-git clone https://github.com/Kind3r/DragToConvert.git
+git clone https://github.com/Kind3rin/DragToConvert.git
 cd DragToConvert
 npm install
 npm start

@@ -60,13 +60,13 @@
       "runAfterFinish": true
     }
   },
-  "homepage": "https://github.com/Kind3r/DragToConvert#readme",
+  "homepage": "https://github.com/Kind3rin/DragToConvert#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Kind3r/DragToConvert.git"
+    "url": "git+https://github.com/Kind3rin/DragToConvert.git"
   },
   "bugs": {
-    "url": "https://github.com/Kind3r/DragToConvert/issues"
+    "url": "https://github.com/Kind3rin/DragToConvert/issues"
   },
   "keywords": [
     "file-converter",
@@ -76,5 +76,8 @@
     "ffmpeg",
     "sharp",
     "tray-app"
-  ]
+  ],
+  "engines": {
+    "node": ">=20"
+  }
 }

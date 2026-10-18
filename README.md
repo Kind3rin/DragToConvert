@@ -9,12 +9,12 @@
 A tiny Windows tray app that turns any drag-and-drop in File Explorer into a file conversion.
 No windows to open, no menus to dig through, no upload: everything runs locally.
 
-[![Release](https://img.shields.io/github/v/release/Kind3r/DragToConvert?style=flat-square&color=8b5cf6)](https://github.com/Kind3r/DragToConvert/releases/latest)
+[![Release](https://img.shields.io/github/v/release/Kind3rin/DragToConvert?style=flat-square&color=8b5cf6)](https://github.com/Kind3rin/DragToConvert/releases/latest)
 [![License: MIT](https://img.shields.io/badge/license-MIT-ec4899?style=flat-square)](LICENSE)
 ![Platform: Windows 10/11](https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-f59e0b?style=flat-square)
 ![Electron](https://img.shields.io/badge/built%20with-Electron-14b8a6?style=flat-square)
 
-[**Download**](https://github.com/Kind3r/DragToConvert/releases/latest) · [How it works](docs/HOW-IT-WORKS.md) · [Italiano](README.it.md)
+[**Download**](https://github.com/Kind3rin/DragToConvert/releases/latest) · [How it works](docs/HOW-IT-WORKS.md) · [Italiano](README.it.md)
 
 </div>
 
@@ -46,7 +46,7 @@ Prefer no modifier key? Switch the tray option to *Just drag* and the wheel appe
 
 **The easy way**
 
-1. Download `DragToConvert Setup x.y.z.exe` from the [latest release](https://github.com/Kind3r/DragToConvert/releases/latest).
+1. Download `DragToConvert Setup x.y.z.exe` from the [latest release](https://github.com/Kind3rin/DragToConvert/releases/latest).
 2. Run it. It installs per-user, **no admin rights needed**, and starts right away.
 3. Look for the wheel icon in the system tray (you may need to expand the `^` arrow).
 
@@ -58,7 +58,7 @@ To start it automatically with Windows, right-click the tray icon and enable **S
 **From source**
 
 ```bash
-git clone https://github.com/Kind3r/DragToConvert.git
+git clone https://github.com/Kind3rin/DragToConvert.git
 cd DragToConvert
 npm install
 npm start
@@ -103,6 +103,9 @@ Everything is processed locally, nothing leaves your PC. The app makes no networ
 **The wheel doesn't show up.**
 Make sure the drag starts in File Explorer or on the desktop, or enable *Also work outside File Explorer*. Apps running as administrator can't be observed by a normal-privilege app: run DragToConvert as administrator too if you need that.
 
+**My antivirus flags it. Why?**
+DragToConvert needs a global mouse hook to notice when a drag starts, and that technique is also used by keyloggers, so some security tools are suspicious of unsigned apps that use it. The code is fully open (the hook only reads button state, pointer movement and Shift: see [SECURITY.md](SECURITY.md)). Every release ships a `SHA256SUMS.txt` so you can verify the download (`Get-FileHash "DragToConvert Setup x.y.z.exe"`), and you can always build the installer yourself.
+
 **Why does Shift + drag in Explorer normally move files?**
 It does, and that's why the wheel is only a drop target: if you release the file anywhere else, Windows behaves exactly as usual.
 
@@ -118,7 +121,7 @@ Not yet. See the roadmap below.
 - [ ] PDF → images, images → single multi-page PDF
 - [ ] Audio/video quality presets
 - [ ] Custom tools and per-format defaults
-- [ ] Code-signed installer and `winget` package
+- [ ] Code-signed installer (e.g. via a free open-source signing program) and `winget` package
 - [ ] More languages
 
 Ideas and pull requests are very welcome: see [CONTRIBUTING.md](CONTRIBUTING.md).

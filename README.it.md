@@ -9,11 +9,11 @@
 Una piccola app per la tray di Windows che trasforma ogni trascinamento in Esplora file in una conversione.
 Niente finestre da aprire, niente menu, niente upload: tutto avviene in locale.
 
-[![Release](https://img.shields.io/github/v/release/Kind3r/DragToConvert?style=flat-square&color=8b5cf6)](https://github.com/Kind3r/DragToConvert/releases/latest)
+[![Release](https://img.shields.io/github/v/release/Kind3rin/DragToConvert?style=flat-square&color=8b5cf6)](https://github.com/Kind3rin/DragToConvert/releases/latest)
 [![Licenza: MIT](https://img.shields.io/badge/licenza-MIT-ec4899?style=flat-square)](LICENSE)
 ![Piattaforma: Windows 10/11](https://img.shields.io/badge/piattaforma-Windows%2010%20%7C%2011-f59e0b?style=flat-square)
 
-[**Scarica**](https://github.com/Kind3r/DragToConvert/releases/latest) · [Come funziona](docs/HOW-IT-WORKS.md) · [English](README.md)
+[**Scarica**](https://github.com/Kind3rin/DragToConvert/releases/latest) · [Come funziona](docs/HOW-IT-WORKS.md) · [English](README.md)
 
 </div>
 
@@ -41,7 +41,7 @@ Non vuoi usare Shift? Dal menu della tray scegli *Solo trascina*: la ruota compa
 
 **Il modo facile**
 
-1. Scarica `DragToConvert Setup x.y.z.exe` dall'[ultima release](https://github.com/Kind3r/DragToConvert/releases/latest).
+1. Scarica `DragToConvert Setup x.y.z.exe` dall'[ultima release](https://github.com/Kind3rin/DragToConvert/releases/latest).
 2. Eseguilo: si installa per l'utente corrente, **senza permessi di amministratore**, e parte subito.
 3. Cerca l'icona a ruota nell'area di notifica (potrebbe essere dietro la freccia `^`).
 
@@ -53,7 +53,7 @@ Per l'avvio automatico: clic destro sull'icona nella tray e attiva **Avvia con W
 **Da sorgente**
 
 ```bash
-git clone https://github.com/Kind3r/DragToConvert.git
+git clone https://github.com/Kind3rin/DragToConvert.git
 cd DragToConvert
 npm install
 npm start
@@ -93,6 +93,9 @@ Tutto viene elaborato in locale, niente esce dal PC e l'app non fa richieste di 
 
 **La ruota non compare.**
 Controlla che il trascinamento parta da Esplora file o dal desktop, oppure attiva *Funziona anche fuori da Esplora file*. Le app eseguite come amministratore non sono osservabili da un'app normale: in quel caso avvia anche DragToConvert come amministratore.
+
+**L'antivirus lo segnala. Perché?**
+Per accorgersi dell'inizio di un trascinamento serve un hook globale del mouse, tecnica usata anche dai keylogger: alcuni antivirus sono sospettosi verso le app non firmate che la usano. Il codice è aperto (l'hook legge solo stato dei pulsanti, movimento e Shift: vedi [SECURITY.md](SECURITY.md)). Ogni release include `SHA256SUMS.txt` per verificare il download (`Get-FileHash "DragToConvert Setup x.y.z.exe"`) e puoi sempre compilare l'installer da solo.
 
 **Shift + trascina in Esplora file di solito sposta i file, no?**
 Sì, per questo la ruota è solo una destinazione di rilascio: se rilasci il file altrove, Windows si comporta come sempre.
