@@ -25,7 +25,7 @@
   },
   "productName": "DragToConvert",
   "devDependencies": {
-    "electron-builder": "^26.15.3",
+    "electron-builder": "^26.18.0",
     "electron": "^44.9.0"
   },
   "build": {
