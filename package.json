@@ -18,7 +18,7 @@
   "dependencies": {
     "ffmpeg-static": "^5.3.0",
     "heic-convert": "^2.1.0",
-    "koffi": "^3.3.3",
+    "koffi": "^3.3.5",
     "pdf-lib": "^1.17.1",
     "sharp": "^0.35.5",
     "uiohook-napi": "^1.5.5"
